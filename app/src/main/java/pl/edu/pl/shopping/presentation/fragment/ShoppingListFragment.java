@@ -8,10 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.List;
 
 import pl.edu.pl.shopping.R;
 import pl.edu.pl.shopping.data.ShoppingRepository;
+import pl.edu.pl.shopping.data.entity.ListItem;
 import pl.edu.pl.shopping.data.entity.ShoppingList;
+import pl.edu.pl.shopping.presentation.adapter.ItemListAdapter;
 
 
 public class ShoppingListFragment extends Fragment {
@@ -21,8 +26,11 @@ public class ShoppingListFragment extends Fragment {
     private EditText productName;
     private EditText quantity;
     private Button button;
+    private ListView listView;
+    private ItemListAdapter adapter;
 
     ShoppingList item;
+    List<ListItem> itemList;
     private ShoppingRepository repository;
 
     public ShoppingListFragment() {
@@ -50,6 +58,7 @@ public class ShoppingListFragment extends Fragment {
             item = repository.createShoppingList(new ShoppingList());
         }
 
+        itemList = repository.getShoppingListItems(item.getId());
     }
 
     @Override
@@ -60,6 +69,11 @@ public class ShoppingListFragment extends Fragment {
         productName = (EditText) view.findViewById(R.id.new_product_name);
         quantity = (EditText) view.findViewById(R.id.new_product_quantity);
         button = (Button) view.findViewById(R.id.add_button);
+        listView = (ListView) view.findViewById(R.id.shopping_list_items);
+
+        adapter = new ItemListAdapter(getActivity(), R.layout.item_line, itemList);
+
+        listView.setAdapter(adapter);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +86,17 @@ public class ShoppingListFragment extends Fragment {
     }
 
     private void addProduct() {
+
+        ListItem listItem = new ListItem();
+        listItem.setShoppingID(item.getId());
+        listItem.setName(productName.getText().toString());
+        listItem.setQuantity(quantity.getText().toString());
+
+        ShoppingRepository repository = new ShoppingRepository();
+        repository.createListItem(listItem);
+
+        adapter.add(listItem);
+        adapter.notifyDataSetChanged();
 
     }
 

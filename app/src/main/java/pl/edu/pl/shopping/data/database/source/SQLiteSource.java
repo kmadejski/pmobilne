@@ -46,8 +46,9 @@ public class SQLiteSource implements ShoppingSource{
     }
 
     @Override
-    public List<ListItem> getShoppingListItems() {
-        Cursor cursor = resolver.query(ItemTable.CONTENT_URI, null, null, null, null);
+    public List<ListItem> getShoppingListItems(long shoppingListId) {
+        String[] args = new String[] {Long.toString(shoppingListId)};
+        Cursor cursor = resolver.query(ItemTable.CONTENT_URI, null, "shopping_id=?", args, null);
         return orm.listFromCursor(cursor, ListItem.class);
     }
 
@@ -57,5 +58,12 @@ public class SQLiteSource implements ShoppingSource{
         final Cursor cursor = resolver.query(uri, null, null, null, null);
         cursor.moveToFirst();
         return orm.fromCursor(cursor, ShoppingList.class);
+    }
+
+    public ListItem createListItem(ContentValues values) {
+        Uri uri = resolver.insert(ItemTable.CONTENT_URI,values);
+        final Cursor cursor = resolver.query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        return orm.fromCursor(cursor, ListItem.class);
     }
 }

@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class ListDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "shopping_db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 53;
 
     public ListDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -26,6 +26,6 @@ public class ListDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
         ListTable.onUpgrade(database, oldVersion, newVersion);
-        ListTable.onUpgrade(database, oldVersion, newVersion);
+        ItemTable.onUpgrade(database, oldVersion, newVersion);
     }
 }

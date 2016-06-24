@@ -24,7 +24,7 @@ public class ListTable {
         database.execSQL(
             "CREATE TABLE " + TABLE_NAME +
             "(" +
-                COLUMN_ID + " integer primary key autoincrement, " +
+                COLUMN_ID + " INTEGER NOT NULL PRIMARY KEY, " +
                 COLUMN_DATETIME + " integer not null default(current_timestamp), " +
                 COLUMN_AUTHOR + " text " +
             ")"

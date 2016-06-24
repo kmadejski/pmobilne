@@ -4,6 +4,7 @@ import java.util.List;
 
 import pl.edu.pl.shopping.data.database.source.SQLiteSource;
 import pl.edu.pl.shopping.data.database.source.ShoppingSource;
+import pl.edu.pl.shopping.data.entity.ListItem;
 import pl.edu.pl.shopping.data.entity.ShoppingList;
 
 /**
@@ -25,9 +26,18 @@ public class ShoppingRepository {
         return source.getShoppingLists();
     }
 
-    public ShoppingList createShoppingList(ShoppingList shoppingList) {
-        return source.createShoppingList(shoppingList.toContentValues());
+    public List<ListItem> getShoppingListItems(long id) {
+        return source.getShoppingListItems(id);
     }
+
+    public ShoppingList createShoppingList(ShoppingList shoppingList) {
+        return source.createShoppingList(shoppingList.toContentValue());
+    }
+
+    public ListItem createListItem(ListItem listItem) {
+        return this.source.createListItem(listItem.toContentValue());
+    }
+
 
 
 }

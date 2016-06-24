@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".presentation.ShoppingListActivity">
         </activity>
-        <activity android:name=".view.MainListActivity">
+        <activity android:name=".presentation.MainListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

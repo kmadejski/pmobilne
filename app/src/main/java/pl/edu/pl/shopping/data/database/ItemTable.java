@@ -29,7 +29,8 @@ public class ItemTable {
         database.execSQL(
                 "CREATE TABLE " + TABLE_NAME +
                         "(" +
-                        COLUMN_ID + " integer primary key autoincrement, " +
+                        COLUMN_ID + " INTEGER NOT NULL PRIMARY KEY, " +
+                        COLUMN_SHOPPING_LIST_ID + " INTEGER NOT NULL, " +
                         COLUMN_NAME + " text not null, " +
                         COLUMN_QUANTITY + " integer not null " +
                         ")"

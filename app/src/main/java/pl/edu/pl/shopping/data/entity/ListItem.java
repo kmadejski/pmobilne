@@ -1,5 +1,7 @@
 package pl.edu.pl.shopping.data.entity;
 
+import android.content.ContentValues;
+
 import org.chalup.microorm.annotations.Column;
 
 import pl.edu.pl.shopping.data.database.ItemTable;
@@ -11,7 +13,7 @@ import pl.edu.pl.shopping.data.database.ItemTable;
 public class ListItem {
 
     @Column(ItemTable.COLUMN_ID)
-    private long id;
+    private Long id;
 
     @Column(ItemTable.COLUMN_SHOPPING_LIST_ID)
     private long shoppingID;
@@ -22,7 +24,7 @@ public class ListItem {
     @Column(ItemTable.COLUMN_QUANTITY)
     private String quantity;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -53,4 +55,16 @@ public class ListItem {
     public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
+
+    public ContentValues toContentValue() {
+        ContentValues values = new ContentValues();
+        values.put(ItemTable.COLUMN_ID, getId());
+        values.put(ItemTable.COLUMN_NAME, getName());
+        values.put(ItemTable.COLUMN_QUANTITY, getQuantity());
+        values.put(ItemTable.COLUMN_SHOPPING_LIST_ID, getShoppingID());
+
+        return values;
+    }
+
+
 }

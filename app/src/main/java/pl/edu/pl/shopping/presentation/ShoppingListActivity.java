@@ -24,7 +24,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         shoppingList = (ConstraintLayout) findViewById(R.id.activity_shopping_list);
 
-        Long shoppingId = getIntent().getLongExtra("event_id", -1);
+        Long shoppingId = getIntent().getLongExtra(ShoppingListFragment.SHOPPING_ID, -1);
         fragment = ShoppingListFragment.newInstance(shoppingId);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

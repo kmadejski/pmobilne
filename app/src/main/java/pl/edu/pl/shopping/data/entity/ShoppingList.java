@@ -14,7 +14,7 @@ import pl.edu.pl.shopping.data.database.ListTable;
 public class ShoppingList {
 
     @Column(ListTable.COLUMN_ID)
-    private long id;
+    private Long id;
 
     @Column(ListTable.COLUMN_DATETIME)
     private String date;
@@ -38,15 +38,15 @@ public class ShoppingList {
         this.date = date;
     }
 
-    public long getId() {
-        return id;
+    public Long getId() {
+        return id != null ? id : null;
     }
 
     public void setId(long id) {
         this.id = id;
     }
 
-    public ContentValues toContentValues() {
+    public ContentValues toContentValue() {
         ContentValues values = new ContentValues();
         values.put(ListTable.COLUMN_ID, getId());
 

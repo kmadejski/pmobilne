@@ -71,6 +71,10 @@ public class ListContentProvider extends ContentProvider {
             case ITEM_LIST:
                 queryBuilder.setTables(ItemTable.TABLE_NAME);
                 break;
+            case ITEM_ID:
+                queryBuilder.setTables(ItemTable.TABLE_NAME);
+                queryBuilder.appendWhere(ItemTable.COLUMN_ID + "=" + uri.getLastPathSegment());
+                break;
             default:
                 throw new IllegalArgumentException("Unknow URI: " + uri);
         }
@@ -89,7 +93,7 @@ public class ListContentProvider extends ContentProvider {
             case LIST_ID:
                 return ListTable.CONTENT_ITEM_TYPE;
             case LISTS:
-                return ListTable.CONTENT_ITEM_TYPE;
+                return ListTable.CONTENT_LIST_TYPE;
             case ITEM_ID:
                 return ItemTable.CONTENT_ITEM_TYPE;
             case ITEM_LIST:
@@ -111,6 +115,14 @@ public class ListContentProvider extends ContentProvider {
                 try {
                     id = sqlDB.insertOrThrow(ListTable.TABLE_NAME, null, values);
                     result = Uri.withAppendedPath(ListTable.CONTENT_URI, Long.toString(id));;
+                }catch (Exception ex) {
+                    Log.d("dsa", ex.getMessage());
+                }
+                break;
+            case ITEM_LIST:
+                try {
+                    id = sqlDB.insertOrThrow(ItemTable.TABLE_NAME, null, values);
+                    result = Uri.withAppendedPath(ItemTable.CONTENT_URI, Long.toString(id));;
                 }catch (Exception ex) {
                     Log.d("dsa", ex.getMessage());
                 }

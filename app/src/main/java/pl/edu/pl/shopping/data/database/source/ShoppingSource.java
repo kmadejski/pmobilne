@@ -14,7 +14,8 @@ public interface ShoppingSource {
 
     ShoppingList getShoppingList(long id);
     List<ShoppingList> getShoppingLists();
-    List<ListItem> getShoppingListItems();
+    List<ListItem> getShoppingListItems(long id);
     ShoppingList createShoppingList(ContentValues values);
+    ListItem createListItem(ContentValues values);
 
 }
