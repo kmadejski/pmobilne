@@ -1,4 +1,4 @@
-package pl.edu.pl.shopping.database;
+package pl.edu.pl.shopping.data.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

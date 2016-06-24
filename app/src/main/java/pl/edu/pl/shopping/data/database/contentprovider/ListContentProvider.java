@@ -1,4 +1,4 @@
-package pl.edu.pl.shopping.contentprovider;
+package pl.edu.pl.shopping.data.database.contentprovider;
 
 import android.content.ContentProvider;
 import android.content.ContentResolver;
@@ -14,8 +14,8 @@ import android.text.TextUtils;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import pl.edu.pl.shopping.database.ListDatabaseHelper;
-import pl.edu.pl.shopping.database.ListTable;
+import pl.edu.pl.shopping.data.database.ListDatabaseHelper;
+import pl.edu.pl.shopping.data.database.ListTable;
 
 /**
  * Created by kamil on 23.06.16.
@@ -28,7 +28,7 @@ public class ListContentProvider extends ContentProvider {
     private static final int LISTS = 10;
     private static final int LIST_ID = 20;
 
-    private static final String AUTHORITY = "pl.edu.pl.shopping.contentprovider";
+    private static final String AUTHORITY = "pl.edu.pl.shopping.data.database.contentprovider";
     private static final String BASE_PATH = "lists";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
     public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/lists";
