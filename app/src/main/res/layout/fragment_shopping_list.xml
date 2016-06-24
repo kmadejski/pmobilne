@@ -1,0 +1,46 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:orientation="vertical"
+    tools:context="pl.edu.pl.shopping.presentation.fragment.ShoppingListFragment">
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <EditText
+            android:id="@+id/new_product_name"
+            android:maxLines="1"
+            android:layout_weight="2"
+            android:hint="@string/product"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:id="@+id/new_product_quantity"
+            android:maxLines="1"
+            android:inputType="number"
+            android:layout_weight="3"
+            android:hint="@string/quantity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/add_button"
+            android:onClick="addProduct"
+            android:layout_weight="3"
+            android:text="@string/add"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_marginTop="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
+</FrameLayout>

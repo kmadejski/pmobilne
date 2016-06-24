@@ -7,13 +7,16 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
+import pl.edu.pl.shopping.data.database.ItemTable;
 import pl.edu.pl.shopping.data.database.ListDatabaseHelper;
 import pl.edu.pl.shopping.data.database.ListTable;
 
@@ -28,38 +31,45 @@ public class ListContentProvider extends ContentProvider {
     private static final int LISTS = 10;
     private static final int LIST_ID = 20;
 
-    private static final String AUTHORITY = "pl.edu.pl.shopping.data.database.contentprovider";
-    private static final String BASE_PATH = "lists";
-    public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
-    public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/lists";
-    public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/list";
+    private static final int ITEM_LIST = 30;
+    private static final int ITEM_ID = 40;
+
+    public static final String AUTHORITY = "pl.edu.pl.shopping";
+    public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/");
+
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        sURIMatcher.addURI(AUTHORITY, BASE_PATH, LISTS);
-        sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", LIST_ID);
+        sURIMatcher.addURI(AUTHORITY, "shopping", LISTS);
+        sURIMatcher.addURI(AUTHORITY, "shopping/#", LIST_ID);
+        sURIMatcher.addURI(AUTHORITY, "shopping_item", ITEM_LIST);
+        sURIMatcher.addURI(AUTHORITY, "shopping_item/#", ITEM_ID);
     }
 
     @Override
     public boolean onCreate() {
         database = new ListDatabaseHelper(getContext());
-        return false;
+        return true;
     }
 
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        checkColumns(projection);
-        queryBuilder.setTables(ListTable.TABLE_NAME);
+
 
         int uriType = sURIMatcher.match(uri);
 
         switch(uriType) {
             case LISTS:
+                queryBuilder.setTables(ListTable.TABLE_NAME);
                 break;
             case LIST_ID:
+                queryBuilder.setTables(ListTable.TABLE_NAME);
                 queryBuilder.appendWhere(ListTable.COLUMN_ID + "=" + uri.getLastPathSegment());
+                break;
+            case ITEM_LIST:
+                queryBuilder.setTables(ItemTable.TABLE_NAME);
                 break;
             default:
                 throw new IllegalArgumentException("Unknow URI: " + uri);
@@ -75,24 +85,41 @@ public class ListContentProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(Uri uri) {
-        return null;
+        switch (sURIMatcher.match(uri)) {
+            case LIST_ID:
+                return ListTable.CONTENT_ITEM_TYPE;
+            case LISTS:
+                return ListTable.CONTENT_ITEM_TYPE;
+            case ITEM_ID:
+                return ItemTable.CONTENT_ITEM_TYPE;
+            case ITEM_LIST:
+                return ItemTable.CONTENT_LIST_TYPE;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        int uriType = sURIMatcher.match(uri);
         SQLiteDatabase sqlDB = database.getWritableDatabase();
-        long id = 0;
-        switch(uriType) {
+        Uri result = Uri.parse("dsa");
+        long id;
+
+        switch(sURIMatcher.match(uri)) {
             case LISTS:
-                id = sqlDB.insert(ListTable.TABLE_NAME, null, values);
+                try {
+                    id = sqlDB.insertOrThrow(ListTable.TABLE_NAME, null, values);
+                    result = Uri.withAppendedPath(ListTable.CONTENT_URI, Long.toString(id));;
+                }catch (Exception ex) {
+                    Log.d("dsa", ex.getMessage());
+                }
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
-        return Uri.parse(BASE_PATH + "/" + id);
+        return result;
     }
 
     @Override
@@ -145,17 +172,4 @@ public class ListContentProvider extends ContentProvider {
         return rowsUpdated;
     }
 
-    private void checkColumns(String[] projection) {
-        String[] available = {
-                ListTable.COLUMN_CONTENT, ListTable.COLUMN_AUTHOR, ListTable.COLUMN_DATETIME, ListTable.COLUMN_STATUS, ListTable.COLUMN_ID
-        };
-        if(projection != null) {
-            HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));
-            HashSet<String> availableColumns = new HashSet<String>(Arrays.asList(available));
-
-            if(!availableColumns.containsAll(requestedColumns)) {
-                throw new IllegalArgumentException("Unknown columns in projection");
-            }
-        }
-    }
 }

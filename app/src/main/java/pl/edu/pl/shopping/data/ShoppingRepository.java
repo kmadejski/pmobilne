@@ -25,5 +25,9 @@ public class ShoppingRepository {
         return source.getShoppingLists();
     }
 
+    public ShoppingList createShoppingList(ShoppingList shoppingList) {
+        return source.createShoppingList(shoppingList.toContentValues());
+    }
+
 
 }

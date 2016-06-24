@@ -1,5 +1,7 @@
 package pl.edu.pl.shopping.data.database.source;
 
+import android.content.ContentValues;
+
 import java.util.List;
 
 import pl.edu.pl.shopping.data.entity.ListItem;
@@ -13,5 +15,6 @@ public interface ShoppingSource {
     ShoppingList getShoppingList(long id);
     List<ShoppingList> getShoppingLists();
     List<ListItem> getShoppingListItems();
+    ShoppingList createShoppingList(ContentValues values);
 
 }

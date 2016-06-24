@@ -7,4 +7,7 @@
     android:layout_height="match_parent"
     tools:context="pl.edu.pl.shopping.presentation.ShoppingListActivity">
 
+
+
+
 </android.support.constraint.ConstraintLayout>

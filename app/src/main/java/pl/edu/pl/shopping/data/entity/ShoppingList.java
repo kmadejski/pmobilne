@@ -1,7 +1,10 @@
 package pl.edu.pl.shopping.data.entity;
 
+import android.content.ContentValues;
+
 import org.chalup.microorm.annotations.Column;
 
+import pl.edu.pl.shopping.data.database.ItemTable;
 import pl.edu.pl.shopping.data.database.ListTable;
 
 /**
@@ -16,22 +19,8 @@ public class ShoppingList {
     @Column(ListTable.COLUMN_DATETIME)
     private String date;
 
-    @Column(ListTable.COLUMN_STATUS)
-    private String status;
-
     @Column(ListTable.COLUMN_AUTHOR)
     private String author;
-
-    @Column(ListTable.COLUMN_CONTENT)
-    private String content;
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 
     public String getAuthor() {
         return author;
@@ -39,14 +28,6 @@ public class ShoppingList {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getDate() {
@@ -63,6 +44,13 @@ public class ShoppingList {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public ContentValues toContentValues() {
+        ContentValues values = new ContentValues();
+        values.put(ListTable.COLUMN_ID, getId());
+
+        return values;
     }
 
 }

@@ -10,8 +10,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ListDatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "";
-    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "shopping_db";
+    private static final int DATABASE_VERSION = 5;
 
     public ListDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -20,10 +20,12 @@ public class ListDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database) {
         ListTable.onCreate(database);
+        ItemTable.onCreate(database);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
+        ListTable.onUpgrade(database, oldVersion, newVersion);
         ListTable.onUpgrade(database, oldVersion, newVersion);
     }
 }

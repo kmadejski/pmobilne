@@ -7,12 +7,17 @@ import android.util.Log;
 
 import pl.edu.pl.shopping.data.database.contentprovider.ListContentProvider;
 
-public class ListTable {
+/**
+ * Created by wojtek on 24.06.16.
+ */
 
-    public static final String TABLE_NAME   = "shopping";
+public class ItemTable {
+
+    public static final String TABLE_NAME   = "shopping_item";
     public static final String COLUMN_ID    = "id";
-    public static final String COLUMN_DATETIME  = "datetime";
-    public static final String COLUMN_AUTHOR    = "author";
+    public static final String COLUMN_SHOPPING_LIST_ID    = "shopping_id";
+    public static final String COLUMN_NAME    = "name";
+    public static final String COLUMN_QUANTITY    = "quantity";
 
     public static final Uri CONTENT_URI = Uri.withAppendedPath(ListContentProvider.CONTENT_URI, TABLE_NAME);
     public static final String CONTENT_LIST_TYPE =
@@ -22,17 +27,16 @@ public class ListTable {
 
     public static void onCreate(SQLiteDatabase database) {
         database.execSQL(
-            "CREATE TABLE " + TABLE_NAME +
-            "(" +
-                COLUMN_ID + " integer primary key autoincrement, " +
-                COLUMN_DATETIME + " integer not null default(current_timestamp), " +
-                COLUMN_AUTHOR + " text " +
-            ")"
+                "CREATE TABLE " + TABLE_NAME +
+                        "(" +
+                        COLUMN_ID + " integer primary key autoincrement, " +
+                        COLUMN_NAME + " text not null, " +
+                        COLUMN_QUANTITY + " integer not null " +
+                        ")"
         );
     }
 
     public static void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
-        Log.w(ListTable.class.getName(), "Upgrading database from version " + oldVersion + " to " + newVersion + ". This operation will destroy all data!");
         database.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(database);
     }
