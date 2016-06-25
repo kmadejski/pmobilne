@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import pl.edu.pl.shopping.R;
+import pl.edu.pl.shopping.data.SmsParser;
 import pl.edu.pl.shopping.presentation.fragment.DetailsFragment;
 import pl.edu.pl.shopping.presentation.fragment.ShoppingListsFragment;
 
