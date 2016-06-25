@@ -55,14 +55,13 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingList> {
             holder = new ViewHolder();
             holder.name = (TextView) row.findViewById(R.id.shopping_list_name);
 
-            holder.name.setText("Dsadasa");
-
             row.setTag(holder);
         } else  {
             holder = (ViewHolder) row.getTag();
         }
 
         final ShoppingList item = list.get(position);
+        holder.name.setText(item.getName());
         row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

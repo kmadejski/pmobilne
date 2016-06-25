@@ -66,4 +66,15 @@ public class SQLiteSource implements ShoppingSource{
         cursor.moveToFirst();
         return orm.fromCursor(cursor, ListItem.class);
     }
+
+    @Override
+    public boolean checkItem(long id, boolean checked) {
+        String[] args = new String[] {Long.toString(id)};
+        ContentValues values = new ContentValues();
+        Integer integer = checked ? 1 : 0;
+        values.put(ItemTable.COLUMN_STATUS, integer);
+
+        resolver.update(ItemTable.CONTENT_URI, values, "id=?", args);
+        return true;
+    }
 }

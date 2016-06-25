@@ -177,6 +177,9 @@ public class ListContentProvider extends ContentProvider {
                     rowsUpdated = sqlDB.update(ListTable.TABLE_NAME, values, ListTable.COLUMN_ID + "=" + id + " AND " + selection, selectionArgs);
                 }
                 break;
+            case ITEM_LIST:
+                rowsUpdated = sqlDB.update(ItemTable.TABLE_NAME, values, selection, selectionArgs);
+                break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }

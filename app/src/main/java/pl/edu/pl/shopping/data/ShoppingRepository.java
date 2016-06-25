@@ -38,6 +38,10 @@ public class ShoppingRepository {
         return this.source.createListItem(listItem.toContentValue());
     }
 
+    public boolean checkItem(long id, boolean checked) {
+        return this.source.checkItem(id, checked);
+    }
+
 
 
 }

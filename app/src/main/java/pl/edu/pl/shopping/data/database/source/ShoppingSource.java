@@ -17,5 +17,6 @@ public interface ShoppingSource {
     List<ListItem> getShoppingListItems(long id);
     ShoppingList createShoppingList(ContentValues values);
     ListItem createListItem(ContentValues values);
+    boolean checkItem(long id, boolean checked);
 
 }

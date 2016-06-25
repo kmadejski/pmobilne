@@ -1,6 +1,8 @@
 package pl.edu.pl.shopping.presentation.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,12 @@ public class ShoppingListsFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.shopping_lists);
         setUp();
         return view;
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
     }
 
     private void setUp() {

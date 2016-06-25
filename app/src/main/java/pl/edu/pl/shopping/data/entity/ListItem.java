@@ -1,6 +1,7 @@
 package pl.edu.pl.shopping.data.entity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 
 import org.chalup.microorm.annotations.Column;
 
@@ -23,6 +24,17 @@ public class ListItem {
 
     @Column(ItemTable.COLUMN_QUANTITY)
     private String quantity;
+
+    @Column(ItemTable.COLUMN_STATUS)
+    private Integer status;
+
+    public Integer getStatus() {
+        return status != null ? status : 0;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public Long getId() {
         return id;

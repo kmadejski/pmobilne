@@ -18,6 +18,7 @@ public class ItemTable {
     public static final String COLUMN_SHOPPING_LIST_ID    = "shopping_id";
     public static final String COLUMN_NAME    = "name";
     public static final String COLUMN_QUANTITY    = "quantity";
+    public static final String COLUMN_STATUS    = "status";
 
     public static final Uri CONTENT_URI = Uri.withAppendedPath(ListContentProvider.CONTENT_URI, TABLE_NAME);
     public static final String CONTENT_LIST_TYPE =
@@ -32,6 +33,7 @@ public class ItemTable {
                         COLUMN_ID + " INTEGER NOT NULL PRIMARY KEY, " +
                         COLUMN_SHOPPING_LIST_ID + " INTEGER NOT NULL, " +
                         COLUMN_NAME + " text not null, " +
+                        COLUMN_STATUS + " integer not null default 0, " +
                         COLUMN_QUANTITY + " integer not null " +
                         ")"
         );

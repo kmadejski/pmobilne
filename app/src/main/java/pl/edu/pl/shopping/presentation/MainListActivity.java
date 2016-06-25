@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -21,6 +22,11 @@ import pl.edu.pl.shopping.presentation.fragment.ShoppingListsFragment;
 public class MainListActivity extends AppCompatActivity implements OnShoppingListFragmentSelectedListener {
 
     boolean dualPane;
+
+    @Override
+    public MenuInflater getMenuInflater() {
+        return super.getMenuInflater();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
