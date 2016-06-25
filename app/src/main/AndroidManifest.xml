@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".presentation.ShoppingListActivity"></activity>
+        <activity android:name=".presentation.SettingsActivity"></activity>
         <activity android:name=".presentation.MainListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +22,6 @@
         <provider
             android:name=".data.database.contentprovider.ListContentProvider"
             android:authorities="pl.edu.pl.shopping" />
-
     </application>
 
 </manifest>

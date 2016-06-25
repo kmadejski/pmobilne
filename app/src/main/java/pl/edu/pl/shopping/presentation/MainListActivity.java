@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -82,5 +83,11 @@ public class MainListActivity extends AppCompatActivity implements OnShoppingLis
     @Override
     public void onItemSelected(String item) {
 
+    }
+
+
+    public void goToSettings(View view) {
+        Intent myIntent = new Intent(MainListActivity.this, SettingsActivity.class);
+        MainListActivity.this.startActivity(myIntent);
     }
 }
