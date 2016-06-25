@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
 import pl.edu.pl.shopping.R;
 import pl.edu.pl.shopping.data.entity.ShoppingList;
 import pl.edu.pl.shopping.presentation.ShoppingListActivity;
-import pl.edu.pl.shopping.presentation.fragment.ShoppingListFragment;
+import pl.edu.pl.shopping.presentation.fragment.DetailsFragment;
 
 /**
  * Created by wojtek on 24.06.16.
@@ -68,7 +67,7 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingList> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ShoppingListActivity.class);
-                intent.putExtra(ShoppingListFragment.SHOPPING_ID, item.getId());
+                intent.putExtra(DetailsFragment.SHOPPING_ID, item.getId());
                 context.startActivity(intent);
             }
         });

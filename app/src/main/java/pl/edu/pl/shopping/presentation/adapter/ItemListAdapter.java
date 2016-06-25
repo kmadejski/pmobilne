@@ -2,7 +2,6 @@ package pl.edu.pl.shopping.presentation.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +12,6 @@ import java.util.List;
 
 import pl.edu.pl.shopping.R;
 import pl.edu.pl.shopping.data.entity.ListItem;
-import pl.edu.pl.shopping.data.entity.ShoppingList;
-import pl.edu.pl.shopping.presentation.ShoppingListActivity;
-import pl.edu.pl.shopping.presentation.fragment.ShoppingListFragment;
 
 /**
  * Created by wojtek on 25.06.16.

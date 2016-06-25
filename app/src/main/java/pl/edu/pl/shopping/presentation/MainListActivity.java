@@ -1,12 +1,20 @@
 package pl.edu.pl.shopping.presentation;
 
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import pl.edu.pl.shopping.R;
+import pl.edu.pl.shopping.presentation.fragment.DetailsFragment;
 import pl.edu.pl.shopping.presentation.fragment.ShoppingListsFragment;
 
 public class MainListActivity extends AppCompatActivity implements OnShoppingListFragmentSelectedListener {
@@ -37,6 +45,37 @@ public class MainListActivity extends AppCompatActivity implements OnShoppingLis
 
 
 
+
+    }
+
+    public void createShoppingList(View view) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Podaj nazwe listy zakupów");
+        final EditText input = new EditText(this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+        builder.setView(input);
+        builder.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.setPositiveButton("Zapisz", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(MainListActivity.this, ShoppingListActivity.class);
+                intent.putExtra(DetailsFragment.SHOPPING_NAME, input.getText().toString());
+
+                startActivity(intent);
+            }
+        });
+
+        builder.show();
 
     }
 

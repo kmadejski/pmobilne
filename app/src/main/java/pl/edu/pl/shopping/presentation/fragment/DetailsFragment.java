@@ -1,6 +1,5 @@
 package pl.edu.pl.shopping.presentation.fragment;
 
-import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,9 +18,10 @@ import pl.edu.pl.shopping.data.entity.ShoppingList;
 import pl.edu.pl.shopping.presentation.adapter.ItemListAdapter;
 
 
-public class ShoppingListFragment extends Fragment {
+public class DetailsFragment extends Fragment {
 
     public static final String SHOPPING_ID = "shopping";
+    public static final String SHOPPING_NAME = "shopping_name";
 
     private EditText productName;
     private EditText quantity;
@@ -33,14 +33,15 @@ public class ShoppingListFragment extends Fragment {
     List<ListItem> itemList;
     private ShoppingRepository repository;
 
-    public ShoppingListFragment() {
+    public DetailsFragment() {
         // Required empty public constructor
     }
 
-    public static ShoppingListFragment newInstance(long id) {
-        ShoppingListFragment fragment = new ShoppingListFragment();
+    public static DetailsFragment newInstance(Long id, String name) {
+        DetailsFragment fragment = new DetailsFragment();
         Bundle args = new Bundle();
         args.putLong(SHOPPING_ID, id);
+        args.putString(SHOPPING_NAME, name);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,8 +55,10 @@ public class ShoppingListFragment extends Fragment {
 
         if (arguments.getLong(SHOPPING_ID) != -1) {
             item = repository.getShoppingList(arguments.getLong(SHOPPING_ID));
-        } else {
-            item = repository.createShoppingList(new ShoppingList());
+        } else if(arguments.getString(SHOPPING_NAME) != null) {
+            ShoppingList shoppingList = new ShoppingList();
+            shoppingList.setName(arguments.getString(SHOPPING_NAME));
+            item = repository.createShoppingList(shoppingList);
         }
 
         itemList = repository.getShoppingListItems(item.getId());
@@ -64,7 +67,7 @@ public class ShoppingListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_shopping_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_details, container, false);
 
         productName = (EditText) view.findViewById(R.id.new_product_name);
         quantity = (EditText) view.findViewById(R.id.new_product_quantity);
@@ -78,7 +81,7 @@ public class ShoppingListFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShoppingListFragment.this.addProduct();
+                DetailsFragment.this.addProduct();
             }
         });
 

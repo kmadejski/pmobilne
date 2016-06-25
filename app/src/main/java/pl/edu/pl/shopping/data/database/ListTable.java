@@ -11,6 +11,7 @@ public class ListTable {
 
     public static final String TABLE_NAME   = "shopping";
     public static final String COLUMN_ID    = "id";
+    public static final String COLUMN_NAME    = "name";
     public static final String COLUMN_DATETIME  = "datetime";
     public static final String COLUMN_AUTHOR    = "author";
 
@@ -25,6 +26,7 @@ public class ListTable {
             "CREATE TABLE " + TABLE_NAME +
             "(" +
                 COLUMN_ID + " INTEGER NOT NULL PRIMARY KEY, " +
+                COLUMN_NAME + " TEXT NOT NULL, " +
                 COLUMN_DATETIME + " integer not null default(current_timestamp), " +
                 COLUMN_AUTHOR + " text " +
             ")"

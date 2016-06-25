@@ -1,24 +1,17 @@
 package pl.edu.pl.shopping.presentation.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.List;
 
 import pl.edu.pl.shopping.R;
 import pl.edu.pl.shopping.data.ShoppingRepository;
 import pl.edu.pl.shopping.data.entity.ShoppingList;
-import pl.edu.pl.shopping.presentation.OnShoppingListFragmentSelectedListener;
 import pl.edu.pl.shopping.presentation.adapter.ShoppingListAdapter;
 
 /**

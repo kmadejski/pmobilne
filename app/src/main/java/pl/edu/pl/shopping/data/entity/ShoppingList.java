@@ -22,6 +22,18 @@ public class ShoppingList {
     @Column(ListTable.COLUMN_AUTHOR)
     private String author;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Column(ListTable.COLUMN_NAME)
+
+    private String name;
+
     public String getAuthor() {
         return author;
     }
@@ -49,7 +61,7 @@ public class ShoppingList {
     public ContentValues toContentValue() {
         ContentValues values = new ContentValues();
         values.put(ListTable.COLUMN_ID, getId());
-
+        values.put(ListTable.COLUMN_NAME, getName());
         return values;
     }
 

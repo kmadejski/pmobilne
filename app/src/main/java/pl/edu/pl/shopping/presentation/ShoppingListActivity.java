@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import pl.edu.pl.shopping.R;
-import pl.edu.pl.shopping.presentation.fragment.ShoppingListFragment;
+import pl.edu.pl.shopping.presentation.fragment.DetailsFragment;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
@@ -15,7 +15,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     private long id;
     private ConstraintLayout shoppingList;
 
-    private ShoppingListFragment fragment;
+    private DetailsFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +24,10 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         shoppingList = (ConstraintLayout) findViewById(R.id.activity_shopping_list);
 
-        Long shoppingId = getIntent().getLongExtra(ShoppingListFragment.SHOPPING_ID, -1);
-        fragment = ShoppingListFragment.newInstance(shoppingId);
+        Long shoppingId = getIntent().getLongExtra(DetailsFragment.SHOPPING_ID, -1);
+        String name = getIntent().getStringExtra(DetailsFragment.SHOPPING_NAME);
+
+        fragment = DetailsFragment.newInstance(shoppingId, name);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.activity_shopping_list, fragment, SHOPPING_FRAGMENT);

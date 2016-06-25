@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:orientation="vertical"
-    tools:context="pl.edu.pl.shopping.presentation.fragment.ShoppingListFragment">
+    tools:context="pl.edu.pl.shopping.presentation.fragment.DetailsFragment">
     
     <LinearLayout
         android:orientation="horizontal"
