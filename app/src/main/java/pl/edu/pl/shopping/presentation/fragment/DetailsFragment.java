@@ -96,7 +96,7 @@ public class DetailsFragment extends Fragment {
         listItem.setQuantity(quantity.getText().toString());
 
         ShoppingRepository repository = new ShoppingRepository();
-        repository.createListItem(listItem);
+        listItem = repository.createListItem(listItem);
 
         adapter.add(listItem);
         adapter.notifyDataSetChanged();
