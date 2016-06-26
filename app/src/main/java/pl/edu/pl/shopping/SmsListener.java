@@ -9,18 +9,29 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import pl.edu.pl.shopping.data.SmsParser;
+import pl.edu.pl.shopping.presentation.SettingsActivity;
 
 public class SmsListener extends BroadcastReceiver{
+    private SharedPreferences prefs;
+    private ArrayList<String> numbers = new ArrayList<>(3);
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO Auto-generated method stub
+
 
         if(intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")){
+            prefs = ShoppingApplication.provideSharedPreferences();
+
+            numbers.add(prefs.getString(SettingsActivity.PHONE_NO_1, null));
+            numbers.add(prefs.getString(SettingsActivity.PHONE_NO_2, null));
+            numbers.add(prefs.getString(SettingsActivity.PHONE_NO_3, null));
+
             Bundle bundle = intent.getExtras();           //---get the SMS message passed in---
             SmsMessage[] msgs = null;
-            String msg_from;
+            String msg_from = null;
             if (bundle != null){
                 //---retrieve the SMS message received---
                 try{
@@ -31,14 +42,15 @@ public class SmsListener extends BroadcastReceiver{
                         msg_from = msgs[i].getOriginatingAddress();
                         String msgBody = msgs[i].getMessageBody();
 
-                        SmsParser parser = new SmsParser();
-                        parser.parser(msgBody, msg_from);
-
-
+                        if (numbers.contains(msg_from)) {
+                            SmsParser parser = new SmsParser();
+                            parser.parser(msgBody, msg_from);
+                        }
                     }
                 }catch(Exception e){
                            Log.d("Exception caught",e.getMessage());
                 }
+
 
                 PackageManager pm = context.getPackageManager();
                 Intent launchIntent = pm.getLaunchIntentForPackage("pl.edu.pl.shopping");
